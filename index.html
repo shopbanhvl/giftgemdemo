@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEM GIFT CENTER - VIP PREMIUM</title>
+    <!-- Chèn font chữ hiện đại -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* CSS GIAO DIỆN SANG XỊN ĐẸP VIP */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f0c20 0%, #15102a 50%, #06040a 100%);
+            --panel-bg: rgba(25, 18, 50, 0.65);
+            --neon-cyan: #00f2fe;
+            --neon-purple: #9b51e0;
+            --gem-color: #00ffcc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Hiệu ứng hạt nền huyền ảo */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(0, 242, 254, 0.1) 1px, transparent 0);
+            background-size: 40px 40px;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Khung chứa chính (Container) */
+        .vip-container {
+            position: relative;
+            z-index: 1;
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        0 0 30px rgba(155, 81, 224, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Tiêu đề phong cách Cyberpunk */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Khu vực hiển thị số dư Gem */
+        .balance-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 35px;
+            min-width: 200px;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        .gem-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gem-color);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        /* Logo Gem SVG phát sáng siêu đẹp */
+        .gem-icon {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(0 0 8px var(--gem-color));
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Khung nhập liệu (Input Form) */
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .vip-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .vip-input:focus {
+            border-color: var(--neon-cyan);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .vip-input::placeholder {
+            color: #666;
+        }
+
+        /* Nút bấm VIP */
+        .vip-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .vip-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+            filter: brightness(1.1);
+        }
+
+        .vip-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Giao diện Popup/Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 3, 15, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #161131;
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 40px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(155, 81, 224, 0.4);
+            transform: scale(0.7);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .modal-text {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            min-width: 100px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .btn-yes {
+            background: #27ae60;
+            color: white;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-yes:hover { background: #2ecc71; }
+
+        .btn-no {
+            background: #c0392b;
+            color: white;
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+        }
+
+        .btn-no:hover { background: #e74c3c; }
+
+        /* Animation định dạng */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GIAO DIỆN CHÍNH -->
+    <div class="vip-container">
+        <h1>Gem Gift Center</h1>
+        
+        <!-- Ô hiển thị số dư Gem và Logo -->
+        <div class="balance-box">
+            <span class="balance-label">Số dư:</span>
+            <span class="gem-amount" id="gemBalance">99,999</span>
+            <!-- Logo Gem SVG lục giác phát sáng -->
+            <svg class="gem-icon" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+                <path d="M12 2L2 9L12 22L22 9L12 22Z" fill="#00ffcc"/>
+                <path d="M12 2L22 9L12 13L2 9L12 2Z" fill="#00e6b8"/>
+                <path d="M12 13L22 9L12 22Z" fill="#00ccaa"/>
+            </svg>
+        </div>
+
+        <!-- Form nhập tên -->
+        <div class="input-group">
+            <input type="text" id="usernameInput" class="vip-input" placeholder="Nhập tên người nhận..." autocomplete="off">
+        </div>
+
+        <button class="vip-btn" id="giftBtn">Gift Gem</button>
+    </div>
+
+    <!-- POPUP XÁC NHẬN (ARE YOU SURE) -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-box">
+            <h2 class="modal-title" style="color: #f1c40f;">ARE YOU SURE?</h2>
+            <p class="modal-text">Bạn có chắc chắn muốn tặng <span style="color:var(--gem-color); font-weight:bold;">10,000 Gem</span> cho người này không?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-yes" id="btnYes">YES</button>
+                <button class="btn-modal btn-no" id="btnNo">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP THÀNH CÔNG (CONFIRMED) -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box" style="border-color: #27ae60; box-shadow: 0 0 40px rgba(39,174,96,0.4);">
+            <h2 class="modal-title" style="color: #27ae60;">TRANSACTION CONFIRMED!</h2>
+            <p class="modal-text" id="successMessage">Giao dịch thành công khứa ơi!</p>
+            <div class="modal-buttons">
