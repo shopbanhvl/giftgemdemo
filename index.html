@@ -1,387 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TTD Premium Gift</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-
-body{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:
-linear-gradient(135deg,#020202,#001b35);
-
-color:white;
-
-}
-
-
-
-.container{
-
-width:420px;
-
-padding:40px;
-
-
-background:
-
-rgba(255,255,255,0.06);
-
-
-border-radius:25px;
-
-
-border:1px solid rgba(0,170,255,.35);
-
-
-backdrop-filter:blur(18px);
-
-
-box-shadow:
-
-0 0 50px rgba(0,140,255,.35);
-
-
-}
-
-
-
-.title{
-
-text-align:center;
-
-font-size:38px;
-
-font-weight:900;
-
-
-letter-spacing:3px;
-
-
-color:#00aaff;
-
-
-text-shadow:
-
-0 0 20px #008cff;
-
-}
-
-
-
-.line{
-
-height:1px;
-
-background:rgba(255,255,255,.2);
-
-margin:25px 0;
-
-}
-
-
-
-.desc{
-
-text-align:center;
-
-color:#aaa;
-
-font-size:14px;
-
-}
-
-
-
-label{
-
-display:block;
-
-margin-top:20px;
-
-font-size:13px;
-
-color:#888;
-
-}
-
-
-
-input{
-
-
-width:100%;
-
-margin-top:8px;
-
-
-padding:15px;
-
-
-background:#070707;
-
-
-border:1px solid #1b5275;
-
-
-border-radius:12px;
-
-
-color:white;
-
-
-font-size:16px;
-
-
-outline:none;
-
-
-}
-
-
-
-input:focus{
-
-border-color:#00aaff;
-
-box-shadow:0 0 15px #008cff;
-
-}
-
-
-
-button{
-
-
-width:100%;
-
-
-margin-top:30px;
-
-
-padding:16px;
-
-
-border:none;
-
-
-border-radius:15px;
-
-
-background:
-
-linear-gradient(90deg,#008cff,#00c8ff);
-
-
-color:white;
-
-
-font-size:17px;
-
-
-font-weight:bold;
-
-
-letter-spacing:1px;
-
-
-cursor:pointer;
-
-
-transition:.3s;
-
-
-}
-
-
-
-button:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 0 30px #008cff;
-
-}
-
-
-
-.status{
-
-text-align:center;
-
-margin-top:25px;
-
-color:#00eaff;
-
-}
-
-
-
-.footer{
-
-
-margin-top:25px;
-
-
-text-align:center;
-
-
-font-size:12px;
-
-
-color:#666;
-
-
-letter-spacing:2px;
-
-
-}
-
-
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TPD Gift — Send Gems</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:    #000000;
+      --deep:     #050c18;
+      --card:     #080f1e;
+      --border:   #0d2044;
+      --blue:     #0044cc;
+      --electric: #0077ff;
+      --cyan:     #00ccff;
+      --white:    #deeeff;
+      --dim:      #3a6080;
+      --mid:      #7aaac8;
+      --gold:     #ffbb00;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,119,255,.012) 3px, rgba(0,119,255,.012) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 36px;
+      background: rgba(0,0,0,.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+    .nav-brand {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 900; letter-spacing: 4px;
+      color: var(--cyan); text-shadow: 0 0 14px var(--cyan);
+      text-decoration: none;
+    }
+    .nav-balance {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Orbitron', monospace;
+      background: rgba(0,204,255,.07);
+      border: 1px solid rgba(0,204,255,.2);
+      padding: 7px 16px;
+      border-radius: 2px;
+    }
+    .nav-balance-label { color: var(--dim); font-size: 9px; letter-spacing: 3px; }
+    .nav-balance-val {
+      color: var(--cyan); text-shadow: 0 0 10px var(--cyan);
+      font-weight: 700; font-size: 13px;
+    }
+    .nav-balance-val.low { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+
+    /* LAYOUT */
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      padding-top: 60px;
+    }
+
+    /* LEFT */
+    .left-panel {
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(0,68,204,.18) 0%, transparent 70%),
+        var(--deep);
+      padding: 72px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .left-panel::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,119,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,119,255,.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black 20%, transparent 100%);
+      pointer-events: none;
+    }
+    .left-eyebrow {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px; letter-spacing: 5px; color: var(--electric);
+      text-transform: uppercase; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+      position: relative; z-index: 2;
+    }
+    .left-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--electric); }
+    .left-title {
+      font-family: 'Orbitron', monospace;
+      font-weight: 900;
+      font-size: clamp(32px, 4vw, 58px);
+      line-height: 1.05;
+      position: relative; z-index: 2;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 55%, var(--electric) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(0,119,255,.4));
+    }
+    .left-title span {
+      display: block; font-size: .38em; letter-spacing: 6px; margin-top: 6px;
+      background: linear-gradient(90deg, var(--dim), var(--electric));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .left-desc {
+      margin-top: 24px;
+      font-size: 17px; font-weight: 500; color: var(--mid);
+      line-height: 1.7; max-width: 480px;
+      position: relative; z-index: 2;
+    }
+    .gem-info { margin-top: 52px; position: relative; z-index: 2; }
+    .gem-info-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px; letter-spacing: 4px; color: var(--dim);
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .gem-card {
+      display: inline-flex; align-items: center; gap: 16px;
+      background: var(--card);
+      border: 1px solid rgba(0,204,255,.3);
+      padding: 18px 28px;
+      box-shadow: 0 0 24px rgba(0,204,255,.12);
+    }
+    .gem-big-icon { font-size: 36px; }
+    .gem-card-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px; font-weight: 900; color: var(--cyan);
+      letter-spacing: 3px; text-shadow: 0 0 12px var(--cyan);
+    }
+    .gem-card-sub { font-size: 13px; color: var(--dim); margin-top: 3px; letter-spacing: 1px; }
+    .gem-bullets { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+    .gem-bullet {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; color: var(--mid); font-weight: 500;
+    }
+    .gem-bullet::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--electric); box-shadow: 0 0 6px var(--electric);
+      flex-shrink: 0;
+    }
+
+    /* RIGHT */
+    .right-panel {
+      background: var(--card);
+      padding: 56px 40px;
+      overflow-y: auto;
+    }
+    .form-header {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      color: var(--cyan);
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    /* FIELDS */
+    .field { margin-bottom: 26px; }
+    .field-label {
+      display: block;
+      font-family: 'Orbitron', monospace;
+      font-size: 10px; letter-spacing: 3px; color: var(--dim);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .field-label em { color: var(--electric); font-style: normal; }
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: rgba(0,0,0,.5);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 13px 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px; font-weight: 500;
+      outline: none;
+      border-radius: 2px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--dim); }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--electric);
+      box-shadow: 0 0 16px rgba(0,119,255,.2);
+    }
+    .field input.error {
+      border-color: #ff3355;
+      box-shadow: 0 0 12px rgba(255,51,85,.3);
+    }
+    .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+    /* PRESETS */
+    .preset-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px; letter-spacing: 3px; color: var(--dim);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .preset-label em { color: var(--electric); font-style: normal; }
+    .amount-presets {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+      margin-bottom: 10px;
+    }
+    .preset-btn {
+      background: rgba(0,0,0,.5);
+      border: 1px solid var(--border);
+      color: var(--dim);
+      padding: 11px 6px;
+      font-family: 'Orbitron', monospace;
+      font-size: 11px; font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 2px;
+      transition: border-color .2s, color .2s, box-shadow .2s;
+    }
+    .preset-btn:hover {
+      border-color: var(--electric); color: var(--electric);
+      box-shadow: 0 0 10px rgba(0,119,255,.2);
+    }
+    .preset-btn.active {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(0,204,255,.08);
+      box-shadow: 0 0 12px rgba(0,204,255,.2);
+    }
+
+    /* SUMMARY */
+    .gift-summary {
+      background: rgba(0,68,204,.08);
+      border: 1px solid rgba(0,119,255,.25);
+      padding: 20px;
+      margin-bottom: 28px;
+      border-radius: 2px;
+    }
+    .gs-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,119,255,.12);
+      font-size: 14px;
+    }
+    .gs-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .gs-key { color: var(--dim); font-weight: 600; }
+    .gs-val { color: var(--white); font-family: 'Orbitron', monospace; font-size: 13px; }
+    .gs-val.highlight { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+
+    /* SEND BUTTON */
+    .btn-send {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue), var(--electric));
+      border: none; color: #fff;
+      padding: 16px;
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      cursor: pointer; text-transform: uppercase;
+      border-radius: 2px;
+      transition: box-shadow .25s, transform .25s;
+      box-shadow: 0 0 24px rgba(0,119,255,.4);
+    }
+    .btn-send:hover {
+      box-shadow: 0 0 48px rgba(0,204,255,.6);
+      transform: translateY(-2px);
+    }
+
+    /* SUCCESS OVERLAY */
+    .success-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.92);
+      align-items: center; justify-content: center;
+      flex-direction: column; text-align: center;
+      padding: 40px;
+    }
+    .success-overlay.show { display: flex; }
+    .success-icon {
+      font-size: 72px; margin-bottom: 24px;
+      animation: pop .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes pop { 0% { transform: scale(0) } 100% { transform: scale(1) } }
+    .success-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(24px, 4vw, 40px); font-weight: 900;
+      color: var(--cyan); text-shadow: 0 0 30px var(--cyan);
+      margin-bottom: 12px;
+    }
+    .success-sub {
+      font-size: 18px; color: var(--mid);
+      max-width: 440px; line-height: 1.6; margin-bottom: 36px;
+    }
+    .success-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px 36px;
+      max-width: 400px; width: 100%;
+      margin-bottom: 32px;
+      border-radius: 2px;
+    }
+    .sc-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .sc-row:last-child { border-bottom: none; }
+    .sc-key { color: var(--dim); font-weight: 600; }
+    .sc-val { color: var(--white); font-family: 'Orbitron', monospace; font-size: 13px; }
+    .sc-val.hl { color: var(--cyan); }
+    .btn-close {
+      background: transparent;
+      border: 1px solid var(--dim);
+      color: var(--dim);
+      padding: 12px 36px;
+      font-family: 'Orbitron', monospace;
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-close:hover { border-color: var(--electric); color: var(--electric); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel { padding: 60px 24px 48px; }
+      .right-panel { padding: 40px 24px; }
+      nav { padding: 0 20px; }
+    }
+    @media (max-width: 480px) {
+      .amount-presets { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
-
-
 <body>
 
+<nav>
+  <a class="nav-brand" href="#">TPD GIFT</a>
+  <div class="nav-balance">
+    <span class="nav-balance-label">💎 BALANCE</span>
+    <span class="nav-balance-val" id="navBalance">27,000,000</span>
+  </div>
+</nav>
 
-<div class="container">
+<div class="page">
 
+  <!-- LEFT -->
+  <div class="left-panel">
+    <div class="left-eyebrow">GEM GIFT PORTAL</div>
+    <h1 class="left-title">
+      SEND GEMS
+      <span>TOILET POWER DEFENSE</span>
+    </h1>
+    <p class="left-desc">
+      Gift Gems to any player in the game instantly.<br>
+      Fill in the form — we'll handle the rest.
+    </p>
+    <div class="gem-info">
+      <div class="gem-info-label">In-game currency</div>
+      <div class="gem-card">
+        <span class="gem-big-icon">💎</span>
+        <div>
+          <div class="gem-card-name">GEM</div>
+          <div class="gem-card-sub">Premium in-game currency</div>
+        </div>
+      </div>
+      <div class="gem-bullets">
+        <div class="gem-bullet">Unlock powerful defenders &amp; upgrades</div>
+        <div class="gem-bullet">Purchase exclusive skins and boosts</div>
+        <div class="gem-bullet">Skip wave cooldowns instantly</div>
+        <div class="gem-bullet">Delivered to recipient within seconds</div>
+      </div>
+    </div>
+  </div>
 
-<div class="title">
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <div class="form-header">💎 SEND A GEM GIFT</div>
 
-GIFT GEM TTD
+    <div class="field">
+      <label class="field-label" for="recipient">Recipient username <em>*</em></label>
+      <input type="text" id="recipient" placeholder="Enter in-game username..." />
+    </div>
 
+    <div class="preset-label">Amount of Gems <em>*</em></div>
+    <div class="amount-presets">
+      <button class="preset-btn" onclick="setAmount(500)">500</button>
+      <button class="preset-btn active" onclick="setAmount(1000)">1,000</button>
+      <button class="preset-btn" onclick="setAmount(5000)">5,000</button>
+      <button class="preset-btn" onclick="setAmount(10000)">10,000</button>
+    </div>
+    <div class="field">
+      <input type="number" id="amount" value="1000" min="500" placeholder="Min. 500 gems..." oninput="clearPresets()" />
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="message">Message (optional)</label>
+      <textarea id="message" placeholder="banhvlroblox1"></textarea>
+    </div>
+
+    <div class="gift-summary">
+      <div class="gs-row">
+        <span class="gs-key">To</span>
+        <span class="gs-val" id="sum-to">—</span>
+      </div>
+      <div class="gs-row">
+        <span class="gs-key">Currency</span>
+        <span class="gs-val">💎 GEM</span>
+      </div>
+      <div class="gs-row">
+        <span class="gs-key">Amount</span>
+        <span class="gs-val highlight" id="sum-amt">1,000</span>
+      </div>
+    </div>
+
+    <button class="btn-send" onclick="sendGift()">⚡ SEND GEMS NOW</button>
+  </div>
 </div>
 
-
-<p class="desc">
-
-PREMIUM GIFT GEM SYSTEM
-
-</p>
-
-
-<div class="line"></div>
-
-
-
-<label>
-
-Receiver
-
-</label>
-
-
-<input id="username" placeholder="Enter username">
-
-
-
-<label>
-
-Amount
-
-</label>
-
-
-<input id="gem" type="number" placeholder="Enter amount">
-
-
-
-<button onclick="sendGift()">
-
-SENT GIFT
-
-</button>
-
-
-
-<div class="status" id="status">
-
-...
-
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">💎</div>
+  <div class="success-title">GEMS SENT!</div>
+  <p class="success-sub" id="successSub">Gems delivered successfully.</p>
+  <div class="success-card">
+    <div class="sc-row"><span class="sc-key">Recipient</span><span class="sc-val hl" id="sc-to">—</span></div>
+    <div class="sc-row"><span class="sc-key">Currency</span><span class="sc-val">💎 GEM</span></div>
+    <div class="sc-row"><span class="sc-key">Amount</span><span class="sc-val hl" id="sc-amt">—</span></div>
+    <div class="sc-row"><span class="sc-key">Remaining Balance</span><span class="sc-val hl" id="sc-bal">—</span></div>
+    <div class="sc-row"><span class="sc-key">Transaction ID</span><span class="sc-val" id="sc-tx">—</span></div>
+  </div>
+  <button class="btn-close" onclick="closeSuccess()">SEND ANOTHER GIFT</button>
 </div>
-
-
-
-<div class="footer">
-
-@banhvlroblox
-
-</div>
-
-
-
-</div>
-
-
 
 <script>
+  let balance = 27000000;
 
+  function updateNav() {
+    const el = document.getElementById('navBalance');
+    el.textContent = balance.toLocaleString('en-US');
+    el.classList.toggle('low', balance < 1000000);
+  }
 
-function sendGift(){
+  function updateSummary() {
+    const to  = document.getElementById('recipient').value.trim();
+    const amt = parseInt(document.getElementById('amount').value) || 0;
+    document.getElementById('sum-to').textContent  = to  || '—';
+    document.getElementById('sum-amt').textContent = amt ? amt.toLocaleString('en-US') : '—';
+  }
 
+  document.getElementById('recipient').addEventListener('input', updateSummary);
+  document.getElementById('amount').addEventListener('input', updateSummary);
 
-let user=document.getElementById("username").value;
+  function setAmount(v) {
+    document.getElementById('amount').value = v;
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.textContent.replace(/,/g,'')) === v);
+    });
+    updateSummary();
+  }
 
-let gem=document.getElementById("gem").value;
+  function clearPresets() {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    updateSummary();
+  }
 
-let status=document.getElementById("status");
+  function sendGift() {
+    const to  = document.getElementById('recipient').value.trim();
+    const amt = parseInt(document.getElementById('amount').value);
 
+    if (!to) {
+      const el = document.getElementById('recipient');
+      el.classList.add('error');
+      setTimeout(() => el.classList.remove('error'), 1200);
+      return;
+    }
+    if (!amt || amt < 500) {
+      const el = document.getElementById('amount');
+      el.classList.add('error');
+      setTimeout(() => el.classList.remove('error'), 1200);
+      return;
+    }
+    if (amt > balance) {
+      const el = document.getElementById('amount');
+      el.classList.add('error');
+      setTimeout(() => el.classList.remove('error'), 1200);
+      return;
+    }
 
+    balance -= amt;
+    updateNav();
 
-if(!user || !gem){
+    document.getElementById('sc-to').textContent  = to;
+    document.getElementById('sc-amt').textContent = amt.toLocaleString('en-US') + ' Gems';
+    document.getElementById('sc-bal').textContent = balance.toLocaleString('en-US') + ' Gems';
+    document.getElementById('sc-tx').textContent  = 'TPD-' + Math.random().toString(36).substr(2,8).toUpperCase();
+    document.getElementById('successSub').textContent =
+      amt.toLocaleString('en-US') + ' Gems delivered to ' + to + '. Good luck out there!';
 
-status.innerHTML="Please fill in all the information.";
+    document.getElementById('successOverlay').classList.add('show');
+  }
 
-return;
+  function closeSuccess() {
+    document.getElementById('successOverlay').classList.remove('show');
+    document.getElementById('recipient').value = '';
+    document.getElementById('message').value = '';
+    setAmount(1000);
+  }
 
-}
-
-
-
-status.innerHTML="Senting gift...";
-
-
-setTimeout(()=>{
-
-
-status.innerHTML=
-
-"Gift sent successfully";
-
-
-},2000);
-
-
-
-}
-
-
+  updateNav();
+  updateSummary();
 </script>
-
-
 </body>
 </html>
